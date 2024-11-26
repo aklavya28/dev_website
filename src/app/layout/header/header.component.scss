@@ -1,0 +1,20 @@
+.nav_right {
+    display: flex;
+    justify-content: flex-end;
+}
+.navbar-brand > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.navbar-brand > div p {
+    margin: 0;
+    background: linear-gradient(45deg,#0b6bab,#fb3c00);
+    font-size: 34px;
+    font-weight: bold;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -1px;
+}

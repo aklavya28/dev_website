@@ -1,0 +1,49 @@
+
+
+<div class="top_nav">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" [routerLink]="'/'">
+        <div>
+          <img src="/assets/images/logo.png" alt="">
+          <p>Dev Rising Nidhi Ltd</p>
+        </div>
+
+      </a>
+      <button class="navbar-toggler" type="button" (click)="toggle()" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      @if (togglemenu) {
+        <div class="collapse navbar-collapse nav_right" id="navbarTogglerDemo02">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link " [routerLink]="'/'"
+              [ngClass]="{ 'active': currentRoute === '/' }"
+              >Home</a>
+
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"[routerLink]="'/plans'"
+              [ngClass]="{ 'active': currentRoute === '/plans' }"
+              >Plans</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link"[routerLink]="'/about'"
+              [ngClass]="{ 'active': currentRoute === '/about' }"
+              >About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="'/contact'"
+              [ngClass]="{ 'active': currentRoute === '/contact' }"
+              >Contact Us</a>
+            </li>
+
+          </ul>
+
+        </div>
+      }
+    </nav>
+
+  </div>
+</div>
+

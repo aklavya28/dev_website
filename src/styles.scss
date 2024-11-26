@@ -1,1 +1,86 @@
 /* You can add global styles to this file, and also import other style files */
+@use "bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+body, p, h1, h2, h3, h4{
+    font-family: "Poppins", serif;
+
+}
+.top_nav {
+    box-shadow: 0 0 10px #00000059;
+    .navbar-brand img {
+        width: 57px;
+
+    }
+    &>p{
+        font-size: 30px !important;
+    }
+}
+
+
+
+.heading2{
+        font-weight: bold;
+        font-size: 40px;
+        background: linear-gradient(45deg, #0b6bab, #fb3c00);
+        display: inline-block;
+        background-clip: text;
+        color: transparent;
+        margin-bottom: 20px;
+}
+.heading3{
+    font-weight: bold;
+    font-size: 30px;
+    background: linear-gradient(45deg, #0b6bab, #018852);
+    display: inline-block;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+    strong {
+        color: #444;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+}
+.heading4{
+    font-weight: bold;
+    font-size: 22px;
+    background: linear-gradient(45deg, #05111a, #0b77c4);
+    display: inline-block;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 20px;
+}
+// .header_section{
+//     background: url('/assets/images/header_title.jpg') 0 0 no-repeat;
+//     background-size: cover;
+//     box-shadow: 0 0 7px #00000069 inset;
+//     padding: 20px 0;
+// }
+.header_section{
+    background-color:rgba(0,141,221,0.1) ;
+    padding: 15px 0;
+  h1 {
+
+    margin: 0;
+  }
+}
+.inner_fex_2 {
+    display: flex;
+    padding: 50px 0;
+    align-items: center;
+    gap: 20px;
+}
+
+.inner_fex_2>div {
+    flex: 1;
+    /* background: red; */
+}
+
+.inner_fex_2>div:first-child {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.with_bg {
+    background: linear-gradient(180deg, #fdeaea, #dee5ff);
+}

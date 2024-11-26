@@ -1,0 +1,36 @@
+.scheme_loan {
+    padding: 50px;
+}
+
+.scheme_loan .size-40 {
+    font-size: 40px;
+}
+
+.loan_container {
+    display: flex;
+    gap: 20px;
+}
+
+.loan_container>div img {
+    width: 100%;
+}
+
+.loan_container>div {
+    flex: 1;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+.loan_container>div>*:not(img){
+    padding: 15px;
+}
+.loan_container>div>h2{
+    text-align: center;
+    display: block;
+}
+.tagline{
+    text-align: center;
+    color: #7a7a7a;
+    font-style: italic;
+}
+
