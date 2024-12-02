@@ -1,9 +1,11 @@
 .scheme_loan {
     padding: 50px 0;
+    font-size: 14px;
+    ul{ margin-bottom: 5px;}
 }
 
 .scheme_loan .size-40 {
-    font-size: 40px;
+    font-size: 32px;
 }
 
 .loan_container {
@@ -27,6 +29,9 @@
 .loan_container>div>h2{
     text-align: center;
     display: block;
+    color: #0b6bab;
+    margin: 0;
+    font-size: 22px;
 }
 .tagline{
     text-align: center;
