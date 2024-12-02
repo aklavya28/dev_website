@@ -1,11 +1,11 @@
 <app-header-title [title]="'Contact Us'"></app-header-title>
 <div class="without_bg">
     <div class="container">
-        <div class="inner">
-            <div>
-                <div><img src="" alt=""></div>
+        <div class="inner contact">
+            <div class="contact_area">
+                <div class="office_img"><img src="/assets/images/office.png" alt=""></div>
                 <div class="address">
-                    <div></div>
+                    <div><fa-icon [icon]="faBuilding"></fa-icon></div>
                     <div>C/O BHAGAT RAM MANAK
                         MANAK NIWAS GHANAHATTI, SHIMLA
                         Himachal Pradesh - 171014 India</div>
@@ -13,26 +13,91 @@
                 <div class="service">
                     <h2 class="heading4">Customer Service</h2>
                     <div>
-                        <div></div>
-                        <div><a href="tel:0177-2774304">0177-2774304</a></div>
+                        <div><fa-icon [icon]="faPhoneSquare"></fa-icon></div>
+                        <div><a href="tel:18008894304">1800 8894 304</a></div>
                     </div>
                     <div>
-                        <div></div>
+                      <div><fa-icon [icon]="faEnvelope"></fa-icon></div>
                         <div><a href="mailto:ho.devnidhi@gmail.com">{{"ho.devnidhi@gmail.com"}}</a></div>
                     </div>
-
                 </div>
                 <div class="services_avil">
                     <h2 class="heading4">Business Hours</h2>
                     <p>Our customer service team is available during the following hours</p>
-                    <p><strong>Monday to Saturday:</strong> 10:00 AM - 5:00 PM</p>
+                    <p><strong>Monday to Saturday:</strong> 10:00 AM - 6:00 PM</p>
                     <p><strong>Sunday:</strong> Closed</p>
                 </div>
             </div>
-            <div>
+            <div class="form_contact">
+              <h2 class="heading2">Get In Touch</h2>
+                    <form [formGroup]="contactForm" (submit)="submit()">
+                        <div>
+                          <mat-form-field class="example-full-width" appearance="outline" >
+                            <mat-label>Your Name</mat-label>
+                            <input matInput placeholder="Ex. Sunil Bhardwaj" formControlName="name">
+                            @if (contactForm.get('name')?.hasError('required')) {
+                                <mat-error> Name is <strong>required</strong></mat-error>
+                              }
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Mobile Number</mat-label>
+                            <input matInput placeholder="Ex.9459724132" formControlName="mobile_number">
 
 
+                              @if (contactForm.get('mobile_number')?.hasError('required')) {
+                                  <mat-error> Mobile is <strong>required</strong></mat-error>
+                                }@else if (contactForm.get('mobile_number')?.hasError('invalidDigit')) {
+                                  <mat-error> Invalid <strong>Digit</strong></mat-error>
+                                }@else if (contactForm.get('mobile_number')?.hasError('minlength')) {
+                                  <mat-error> Minimum 10 <strong>Digits</strong></mat-error>
+                                }@else if (contactForm.get('mobile_number')?.hasError('maxlength')) {
+                                  <mat-error> Maximum 10 <strong>Digits</strong></mat-error>
+                                }
+
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Ex.aklavya28@gmail.com" formControlName="email">
+                            @if (contactForm.get('email')?.hasError('required')) {
+                                <mat-error> Email is <strong>required</strong></mat-error>
+                              }@else if (contactForm.get('email')?.hasError('email')) {
+                                <mat-error> Invalid <strong>Email</strong></mat-error>
+                              }
+                          </mat-form-field>
+                        </div>
+                        <div>
+                          <mat-form-field class="example-full-width" appearance="outline">
+                            <mat-label>Leave a message</mat-label>
+                            <textarea matInput placeholder="Ex. It makes me feel..."
+                                formControlName="message"
+                            >
+
+
+                            </textarea>
+                            @if (contactForm.get('message')?.hasError('required')) {
+                                <mat-error> Message is <strong>required</strong></mat-error>
+                              }@else if (contactForm.get('message')?.hasError('maxlength')) {
+                                <mat-error> Maximum 200 <strong>Character</strong></mat-error>
+                              }
+                          </mat-form-field>
+                        </div>
+
+                         <div>
+                          <button mat-raised-button color="primary"
+                          type="submit"
+                          [disabled]="this.contactForm.status == 'INVALID' "
+                        >Save</button>
+
+                         </div>
+
+
+                    </form>
             </div>
         </div>
     </div>
 </div>
+

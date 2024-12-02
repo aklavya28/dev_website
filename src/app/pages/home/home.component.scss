@@ -170,3 +170,21 @@
     color: transparent;
     background-clip: text;
 }
+@media(max-width: 750px) {
+    .what_nidhi {flex-flow: column;}
+
+.heading2 {
+    font-size: 30px;
+}
+
+
+.build_foundation .inner {
+    flex-flow: column;
+    &>div{ width: min(100%, 500px) !important;}
+}
+.foundation .inner { flex-flow: column;
+    &>div:last-child{ display: none; }
+}
+
+
+}

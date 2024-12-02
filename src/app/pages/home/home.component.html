@@ -1,23 +1,28 @@
 
-<!-- <img src="https://fastly.picsum.photos/id/482/1200/500.jpg?hmac=4t-5IhFeWUm5PVIu_YcRbiHNiQuHoU0FvuOs5iUZvkU" alt=""> -->
 
-<div >
-  <ngb-carousel [interval] = "4000">
-      <ng-template ngbSlide >
-        <img width="100%" src="/assets/images/banner1.jpg" alt="Dev Nidhi Rising">
-        <div class="carousel-caption">
-          <h3>Slide 1</h3>
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <img  width="100%" src="/assets/images/banner2.jpg" alt="Dev Nidhi Rising">
-
-        <div class="carousel-caption">
-          <h3>Slide sdfsdf sdfs fsdf sdfsf</h3>
-        </div>
-      </ng-template>
-    </ngb-carousel>
+<div>
+  <c-carousel [interval]="2000">
+    <c-carousel-indicators></c-carousel-indicators>
+    <c-carousel-inner>
+      <c-carousel-item *ngFor="let slide of slides">
+        <img
+          alt="{{slide.title}}"
+          class="d-block w-100"
+          loading="lazy"
+          src="{{slide.src}}"
+        />
+        <c-carousel-caption class="d-none d-md-block">
+          <h3>{{slide.title}}</h3>
+          <p>{{slide.subtitle}}</p>
+        </c-carousel-caption>
+      </c-carousel-item>
+    </c-carousel-inner>
+    <c-carousel-control [routerLink] caption="Previous" direction="prev"></c-carousel-control>
+    <c-carousel-control [routerLink] caption="Next" direction="next"></c-carousel-control>
+  </c-carousel>
 </div>
+
+
 
 <div class="container">
   <div class="row">
@@ -45,13 +50,13 @@
         <div class="inner">
           <h2 class="heading2">Schemes</h2>
           <ul>
-            <li><a>
+            <li><a [routerLink]="['/plans']" [fragment]="'rd'" >
               <div>
                 <div>Recurring Deposit</div>
                 <img src="assets/images/deposit_icon.png" alt="">
               </div>
             </a></li>
-            <li><a>
+            <li><a  [routerLink]="['/plans']" fragment="fd">
               <div>
                 <div>Fixed Deposit</div>
                 <img src="assets/images/fixed_d.png" alt="">

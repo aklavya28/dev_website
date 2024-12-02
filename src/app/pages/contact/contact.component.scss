@@ -1,0 +1,126 @@
+
+.contact {
+    display: flex;
+    gap: 29px;
+    padding: 60px 0;
+}
+
+.contact>div {
+    flex: 1;
+}
+
+.contact .contact_area{
+    max-width: 400px !important;
+    background: #fff;
+    padding: 20px;
+    --borderWidth: 5px;
+    background: #fff;
+    position: relative;
+    border-radius: var(--borderWidth);
+
+}
+.contact_area::before {
+    content: '';
+    position: absolute;
+    top: calc(-1 * var(--borderWidth));
+    left: calc(-1 * var(--borderWidth));
+    height: calc(100% + var(--borderWidth) * 2);
+    width: calc(100% + var(--borderWidth) * 2);
+    background: linear-gradient(60deg, #f79533, #f37055, #ef4e7b, #a166ab, #5073b8, #1098ad, #07b39b, #6fba82);
+    border-radius: calc(2 * var(--borderWidth));
+    z-index: -1;
+    animation: animatedgradient 2s ease alternate infinite;
+    background-size: 300% 300%;
+  }
+
+  @keyframes animatedgradient {
+    0% {
+		background-position: 0% 50%;
+        box-shadow: 0 5px 15px #8e8e8e;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+  }
+  .form_contact>form >div mat-form-field {
+    width: 100%;
+}
+
+.form_contact>form >div {
+    margin-bottom: 15px;
+}
+
+.form_contact>form >div:nth-child(4) {margin: 0;}
+.form_contact>form >div mat-form-field {
+    width: 100%;
+}
+
+.form_contact>form >div {
+    margin-bottom: 15px;
+}
+
+.form_contact>form >div:nth-child(4) {margin: 0;}
+
+.address {
+    display: flex;
+    gap: 11px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    position: relative;
+    color: #444;
+}
+
+.address>div:first-child {
+
+    font-size: 25px;
+    color: #0b6cab;
+}
+
+.service>div {
+    display: flex;
+    gap: 10px;
+    flex-flow: row wrap;
+    margin-bottom: 6px;
+}
+
+.service>h2 {
+    margin-bottom: 9px;
+}
+
+.service>div>div:first-child {
+    font-size: 20px;
+    color: #0b6cab;
+    width: 23px;
+}
+
+.service>div a {
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+}
+
+.service {
+    margin-bottom: 13px;
+}
+.office_img>img {
+    width: 100%;
+}
+
+.office_img {
+    position: relative;
+    left: -20px;
+    top: -20px;
+    width: calc(100% + 40px);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+@media(max-width: 750px) {
+
+    .inner.contact {
+        flex-flow: column;
+    }
+}

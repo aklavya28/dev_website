@@ -1,12 +1,13 @@
 import { NgClass } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
+import { CollapseModule, GridModule,  NavbarModule, NavItemComponent } from '@coreui/angular';
 import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, NgClass],
+  imports: [RouterLink, NgClass, NavbarModule, GridModule, NavbarModule, NavItemComponent, CollapseModule ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 
@@ -31,15 +32,15 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-  toggle(){
-    this.togglemenu = !this.togglemenu
-  }
+  // toggle(){
+  //   this.togglemenu = !this.togglemenu
+  // }
 
-  ngOnDestroy(): void {
-    // Unsubscribe to prevent memory leaks
-    if (this.routerSubscription) {
-      this.routerSubscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy(): void {
+  //   // Unsubscribe to prevent memory leaks
+  //   if (this.routerSubscription) {
+  //     this.routerSubscription.unsubscribe();
+  //   }
+  // }
 
 }

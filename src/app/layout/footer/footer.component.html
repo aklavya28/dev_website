@@ -1,3 +1,40 @@
 <div class="footer">
-    <div class="container"> Footer</div>
+    <div class="container">
+        <div class="inner">
+            <div>
+                <img src="/assets/images/logo_white.png" alt="logo">
+            </div>
+            <div>
+                <h2 class="heading5">Location</h2>
+                <div class="address">
+                    <div><fa-icon [icon]="faBuilding"></fa-icon></div>
+                    <div>C/O BHAGAT RAM MANAK
+                        MANAK NIWAS GHANAHATTI, SHIMLA
+                        Himachal Pradesh - 171014 India</div>
+                </div>
+                <div class="service">
+                    <h2 class="heading5">Customer Service</h2>
+                    <div>
+                        <div><fa-icon [icon]="faPhoneSquare"></fa-icon></div>
+                        <div><a href="tel:18008894304">1800 8894 304</a></div>
+                    </div>
+                    <div>
+                      <div><fa-icon [icon]="faEnvelope"></fa-icon></div>
+                        <div><a href="mailto:ho.devnidhi@gmail.com">{{"ho.devnidhi@gmail.com"}}</a></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <h2 class="heading5">Menu</h2>
+               <ul>
+                    <li><a class="nav-link " [routerLink]="'/'">Home</a></li>
+                    <li><a class="nav-link"[routerLink]="'/plans'">Plans</a></li>
+                    <li><a class="nav-link"[routerLink]="'/about'" >About Us</a></li>
+                    <li><a class="nav-link" [routerLink]="'/contact'">Contact Us</a></li>
+               </ul>
+
+            </div>
+
+        </div>
+    </div>
 </div>

@@ -1,5 +1,5 @@
 .scheme_loan {
-    padding: 50px;
+    padding: 50px 0;
 }
 
 .scheme_loan .size-40 {
@@ -33,4 +33,26 @@
     color: #7a7a7a;
     font-style: italic;
 }
+@media(max-width: 750px) {
+    .inner_fex_2 {
+        flex-flow: column;
+        padding: 0 15px;
+    }
+    .inner_fex_2 img {
+        width: 100%;
+    }
+    .inner_fex_2 >div:first-child {position: relative;}
 
+    .inner_fex_2 >div:first-child:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        border-bottom: 1px solid #bdbdbd;
+        width: calc(100% + 60px);
+        left: -30px;
+    }
+    .loan_container{flex-flow: column;}
+    .scheme_loan {padding: 40px 20px;
+        &>div>div>h2{font-size: 30px;}
+    }
+}

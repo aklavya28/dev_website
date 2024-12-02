@@ -1,0 +1,45 @@
+.vision >div>.inner {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 0;
+    &img{width: 100%;}
+}
+
+.vision >div>.inner:not(h2) {
+    font-size: 14px;
+}
+
+.top_about>div>inner {
+    display: flex;
+}
+
+.top_about>div>.inner {
+    display: flex;
+    gap: 20px;
+    font-size: 19px;
+    font-style: italic;
+    color: #ffffff;
+    align-items: center;
+}
+
+.top_about>div>.inner>div:first-child {
+
+}
+
+.top_about img {
+    width: 100%;
+}
+
+.top_about {padding: 50px 0;background: linear-gradient(      45deg,      #0b6bab,      #fb3c00);}
+
+@media(max-width: 750px) {
+    .vision {
+        padding: 15px;
+        &>div>.inner{
+            flex-flow: column;
+        }
+    }
+    .top_about>div>.inner{flex-flow: column;}
+}
