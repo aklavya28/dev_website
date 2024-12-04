@@ -32,15 +32,5 @@ export class HeaderComponent implements OnInit {
       }
     });
   }
-  // toggle(){
-  //   this.togglemenu = !this.togglemenu
-  // }
-
-  // ngOnDestroy(): void {
-  //   // Unsubscribe to prevent memory leaks
-  //   if (this.routerSubscription) {
-  //     this.routerSubscription.unsubscribe();
-  //   }
-  // }
 
 }
