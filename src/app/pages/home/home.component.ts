@@ -46,6 +46,12 @@ export class HomeComponent implements OnInit {
       src: 'assets/images/banner_3.jpg',
       title: 'Third slide',
       subtitle: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+    },
+    {
+      id: 4,
+      src: 'assets/images/banner_4.jpg',
+      title: 'fourth slide',
+      subtitle: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
     }
   ]
 

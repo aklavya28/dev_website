@@ -89,3 +89,20 @@ p,ul,ol{font-size: 14px;}
 .with_bg {
     background: linear-gradient(180deg, #fdeaea, #dee5ff);
 }
+.carousel-indicators >button {
+    background: #795548;
+    border: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    padding: 00;
+}
+
+.carousel-indicators {
+    display: flex;
+    gap: 10px;
+}
+
+.carousel-indicators >button[aria-current = true] {
+    background: red;
+}
