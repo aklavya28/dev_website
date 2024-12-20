@@ -1,5 +1,5 @@
 import { Router, Scroll, Event, ActivatedRoute } from '@angular/router';
-import { Component, OnInit, output } from '@angular/core';
+import { Component, NgZone, OnInit, output } from '@angular/core';
 import { HeaderTitleComponent } from '../../layout/header/header-title/header-title.component';
 import { ViewportScroller } from '@angular/common';
 
@@ -11,7 +11,7 @@ import { ViewportScroller } from '@angular/common';
   styleUrl: './schemes.component.scss'
 })
 export class SchemesComponent implements OnInit {
-  constructor(private aRoute: ActivatedRoute, private viewportScroller: ViewportScroller){
+  constructor(private route: ActivatedRoute, private viewportScroller: ViewportScroller, private ngZone: NgZone){
 
     // viewportScroller.setOffset([0, 50]);
     // this.router.events.subscribe((event: Event) => {
@@ -34,13 +34,47 @@ export class SchemesComponent implements OnInit {
     //   }
     // });
   }
+  // ngOnInit(): void {
+  //   // let d = HeaderTitleComponent
+  //   this.route.fragment.subscribe((fragment) => {
+  //     if (fragment) {
+  //       console.log("sdfsfsdffd", fragment)
+
+  //       this.viewportScroller.scrollToAnchor(fragment);
+  //       console.log("fffffffd", this.viewportScroller.scrollToAnchor(fragment))
+  //     }
+  //   });
+
+
+  //   // this.route.fragment.subscribe(fregment =>{
+  //   //   if(fregment){
+  //   //     console.log(fregment, "inner")
+  //   //     let f =  document.getElementById(fregment)
+
+
+  //   //     const yOffset = -100; // Adjust for any fixed headers
+  //   //     if(f){
+  //   //       console.log("id", f)
+  //   //       const y = f.getBoundingClientRect().top + window.scrollY + yOffset;
+  //   //       window.scrollTo({ top: y, behavior: 'smooth' });
+  //   //     }
+
+  //   //     // this.viewportScroller.scrollToAnchor(fregment)
+  //   //     // console.log(this.viewportScroller)
+  //   //   }
+  //   // })
+  // }
+
   ngOnInit(): void {
-    this.aRoute.fragment.subscribe(fregment =>{
-      if(fregment){
-        this.viewportScroller.scrollToAnchor(fregment)
-        }
-
-
-    })
+    this.route.fragment.subscribe((fragment) => {
+      if (fragment) {
+        console.log('Scrolling to fragment:', fragment);
+        this.ngZone.runOutsideAngular(() => {
+          setTimeout(() => {
+            this.viewportScroller.scrollToAnchor(fragment);
+          }, 0); // Delay to ensure DOM is ready
+        });
+      }
+    });  
   }
 }
