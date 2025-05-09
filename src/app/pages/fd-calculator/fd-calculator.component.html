@@ -1,0 +1,158 @@
+<div class="fd-calculator-container">
+    <div class="calculator-header">
+      <div class="dropdown-container">
+        <!-- <div class="dropdown" [class.open]="isDropdownOpen">
+          <button class="dropdown-btn" (click)="toggleDropdown()">
+            {{getCalculatorTitle()}} <span class="dropdown-arrow">▼</span>
+          </button>
+          <div class="dropdown-content" *ngIf="isDropdownOpen">
+            <div class="dropdown-item" [class.active]="isActiveCalculator('fd')" (click)="changeCalculatorType('fd')">FD Calculator</div>
+            <div class="dropdown-item" [class.active]="isActiveCalculator('rd')" (click)="changeCalculatorType('rd')">RD Calculator</div>
+          </div>
+        </div> -->
+        <div class="dropdown" [ngClass]="{'open': isDropdownOpen}">
+          <button class="dropdown-btn" type="button" (click)="toggleDropdown()">
+            {{getCalculatorTitle()}} <span class="dropdown-arrow">▼</span>
+          </button>
+          <div class="dropdown-content" *ngIf="isDropdownOpen">
+            <div class="dropdown-item" [ngClass]="{'active': calculatorType === 'fd'}" (click)="changeCalculatorType('fd')">
+              FD Calculator
+            </div>
+            <div class="dropdown-item" [ngClass]="{'active': calculatorType === 'rd'}" (click)="changeCalculatorType('rd')">
+              RD Calculator
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="dropdown" [ngClass]="{'open': isDropdownOpen}">
+          <button class="dropdown-btn" type="button" (click)="toggleDropdown()">
+            {{getCalculatorTitle()}} <span class="dropdown-arrow">▼</span>
+          </button> -->
+          <!-- <div class="dropdown-content" *ngIf="isDropdownOpen"> -->
+          <!-- <div class="dropdown-content" [class.open]="isDropdownOpen" [hidden]="!isDropdownOpen">
+            <div class="dropdown-item" [ngClass]="{'active': calculatorType === 'fd'}" (click)="changeCalculatorType('fd')">
+              FD Calculator
+            </div>
+            <div class="dropdown-item" [ngClass]="{'active': calculatorType === 'rd'}" (click)="changeCalculatorType('rd')">
+              RD Calculator
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <div class="total-value">
+        <div class="value-label">Total Value</div>
+        <div class="value-amount">₹{{formatCurrency(totalValue)}}</div>
+      </div>
+    </div>
+  
+    <div class="calculator-body">
+      <div class="inputs-section">
+        <form [formGroup]="calculatorForm">
+          <!-- Investment Amount -->
+          <!-- <div class="input-group">
+            <div class="label-value">
+              <label class="input-label">Total Investment</label>
+              <div class="value-input-container">
+                <input type="number" formControlName="totalInvestment" class="value-input" 
+                  (input)="onInvestmentChange($event)">
+                <span class="currency-symbol">₹</span>
+              </div>
+            </div>
+            <div class="slider-container">
+              <input type="range" min="0" max="100" [value]="investmentSliderValue" class="slider" 
+                (input)="updateInvestmentSlider($event)">
+            </div>
+          </div> -->
+
+          <div class="input-group">
+            <div class="label-value">
+              <label class="input-label">{{calculatorType === 'fd' ? 'Total Investment' : 'Monthly Installment'}}</label>
+              <div class="value-input-container">
+                <input *ngIf="calculatorType === 'fd'" type="number" formControlName="totalInvestment" class="value-input" 
+                  (input)="onInvestmentChange($event)">
+                <input *ngIf="calculatorType === 'rd'" type="number" formControlName="monthlyInstallment" class="value-input" 
+                  (input)="onInvestmentChange($event)">
+                <span class="currency-symbol">₹</span>
+              </div>
+            </div>
+            <div class="slider-container">
+              <input type="range" min="0" max="100" [value]="investmentSliderValue" class="slider" 
+                (input)="updateInvestmentSlider($event)">
+            </div>
+          </div>
+  
+          <!-- Interest Rate -->
+          <div class="input-group">
+            <div class="label-value">
+              <label class="input-label">Interest Rate</label>
+              <div class="value-input-container">
+                <input type="number" formControlName="interestRate" class="value-input" step="0.1" 
+                  (input)="onInterestChange($event)">
+                <span class="currency-symbol">%</span>
+              </div>
+            </div>
+            <div class="slider-container">
+              <input type="range" min="0" max="100" [value]="interestSliderValue" class="slider" 
+                (input)="updateInterestSlider($event)">
+            </div>
+          </div>
+  
+          <!-- Time Period -->
+          <div class="input-group">
+            <div class="label-value">
+              <label class="input-label">Time Period</label>
+              <div class="time-input-container">
+                <input type="number" formControlName="timePeriod" class="value-input time-input" 
+                  (input)="onTimeChange($event)">
+                <div class="period-toggle">
+                  <button type="button" class="period-btn" [class.active]="periodType === 'Yr'" 
+                    (click)="togglePeriodType('Yr')">Yr</button>
+                  <button type="button" class="period-btn" [class.active]="periodType === 'Mo'" 
+                    (click)="togglePeriodType('Mo')">Mo</button>
+                  <button type="button" class="period-btn" [class.active]="periodType === 'Dy'" 
+                    (click)="togglePeriodType('Dy')">Dy</button>
+                </div>
+              </div>
+            </div>
+            <div class="slider-container">
+              <input type="range" min="0" max="100" [value]="timeSliderValue" class="slider" 
+                (input)="updateTimeSlider($event)">
+            </div>
+          </div>
+           <!-- Compounding Frequency -->
+        <div class="input-group">
+          <div class="label-value">
+            <label class="input-label">Compounding Frequency</label>
+          </div>
+          <div class="compounding-options">
+            <select formControlName="compoundingFrequency" class="compounding-select">
+              <option value="yearly">Yearly</option>
+              <option value="half-yearly">Half-Yearly</option>
+              <option value="quarterly">Quarterly</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </div>
+        </div>
+        </form>
+      </div>
+  
+      <div class="results-section">
+        <div class="chart-container">
+          <canvas #pieChart></canvas>
+        </div>
+        
+        <div class="results-breakdown">
+          <div class="breakdown-item">
+            <div class="dot returns-dot"></div>
+            <div class="breakdown-label">Total interest</div>
+            <div class="breakdown-value">₹{{formatCurrency(estimatedReturns)}}</div>
+          </div>
+          <div class="breakdown-item">
+            <div class="dot investment-dot"></div>
+            <div class="breakdown-label">Deposit amount</div>
+            <div class="breakdown-value">₹{{formatCurrency(totalInvestment)}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

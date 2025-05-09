@@ -1,0 +1,275 @@
+.fd-calculator-container {
+    max-width: 900px;
+    margin: 0 auto;
+    font-family: 'Roboto', Arial, sans-serif;
+    color: #333;
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+  }
+  
+  .calculator-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .dropdown-container {
+    position: relative;
+  }
+  
+  .dropdown-btn {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    padding: 10px 16px;
+    font-size: 16px;
+    color: #555;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+  
+  .dropdown-arrow {
+    margin-left: 8px;
+    font-size: 10px;
+  }
+  
+  .total-value {
+    text-align: right;
+  }
+  
+  .value-label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 4px;
+  }
+  
+  .value-amount {
+    font-size: 24px;
+    font-weight: 700;
+    color: #002970;
+    
+  }
+  
+  .calculator-body {
+    display: flex;
+    padding: 24px;
+  }
+  
+  .inputs-section {
+    flex: 1;
+    padding-right: 24px;
+  }
+  
+  .results-section {
+    flex: 1;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .input-group {
+    margin-bottom: 32px;
+  }
+  
+  .label-value {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  .input-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #002970;
+  }
+  
+  .value-input-container {
+    position: relative;
+    width: 120px;
+  }
+  
+  .value-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    text-align: right;
+    padding-right: 25px;
+    font-size: 16px;
+  }
+  
+  .currency-symbol {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
+  }
+  
+  .slider-container {
+    width: 100%;
+    padding: 0 4px;
+  }
+  
+  .slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: linear-gradient(to right, #0b6bab, #fb3c00);
+    outline: none;
+  }
+  
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #f3e40c;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .slider::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #00bcd4;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: none;
+  }
+  
+  .time-input-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .time-input {
+    width: 60px;
+    text-align: center;
+    padding-right: 8px;
+  }
+  
+  .period-toggle {
+    display: flex;
+    margin-left: 8px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .period-btn {
+    padding: 6px 10px;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .period-btn.active {
+    background-color: #00bcd4;
+    color: white;
+  }
+  
+  .chart-container {
+    height: 220px;
+    position: relative;
+    margin-bottom: 24px;
+  }
+  
+  .results-breakdown {
+    margin-top: 16px;
+  }
+  
+  .breakdown-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 12px;
+  }
+  
+  .returns-dot {
+    background-color: #fb6e23;
+  }
+  
+  .investment-dot {
+    background-color: #ffc409;
+  }
+  
+  .breakdown-label {
+    flex: 1;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .breakdown-value {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .compounding-info {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px dashed #e0e0e0;
+    justify-content: center;
+  }
+  
+  .compounding-label {
+    font-size: 14px;
+    color: #666;
+    font-style: italic;
+  }.compounding-options {
+    width: 100%;
+    margin-top: 8px;
+  }
+  
+  .compounding-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    color: #333;
+    
+    &:focus {
+      outline: none;
+      border-color: #00bcd4;
+      box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.2);
+    }
+  }  
+
+  
+  
+  @media (max-width: 768px) {
+    .calculator-body {
+      flex-direction: column;
+    }
+    
+    .inputs-section {
+      padding-right: 0;
+      margin-bottom: 24px;
+    }
+    
+    .chart-container {
+      height: 180px;
+    }
+  }

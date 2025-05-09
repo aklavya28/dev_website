@@ -1,0 +1,553 @@
+/* Main container styles */
+.fd-calculator-container {
+  font-family: 'Roboto', Arial, sans-serif;
+  max-width: 970px;
+  margin: 25px auto;
+  background-color: #f7f9fb;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  // overflow: hidden;
+  border: 1px solid rgba(11, 107, 171, 0.1);
+}
+
+/* Header section styles with gradient */
+.calculator-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #0b6bab 0%, #fb3c00 100%);
+  color: white;
+  padding: 20px 24px;
+  position: relative;
+  // overflow: hidden;
+}
+
+.calculator-header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+
+/* Dropdown styles */
+.dropdown-container {
+  position: relative;
+  z-index: 1000; /* Ensure it’s high enough */
+  overflow: visible; /* Ensure dropdown is not clipped */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-btn {
+  background-color: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px); /* For Safari */
+  color: white;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 6px;
+  transition: all 0.3s;
+  min-width: 180px;
+  justify-content: space-between;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.dropdown-btn:hover {
+  background-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.dropdown-arrow {
+  font-size: 12px;
+  transition: transform 0.3s;
+  margin-left: 8px;
+}
+
+/* Rotate arrow when dropdown is open */
+.dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-content {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 180px; /* Match minimum width of button */
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 100; /* Higher z-index */
+  transform-origin: top center;
+  animation: fadeIn 0.25s ease-out;
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+// .dropdown-content {
+//   position: absolute;
+//   top: calc(100% + 8px); /* Position below the button */
+//   left: 0;
+//   min-width: 180px; 
+//   width: 100%;
+//   background-color: white;
+//   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+//   border-radius: 8px;
+//   overflow: hidden;
+//   z-index: 100; /* Higher z-index */
+//   transform-origin: top center;
+//   animation: fadeIn 0.25s ease-out;
+//   white-space: nowrap;
+//   display: block; /* Ensure dropdown content is displayed when open */
+// }
+/* Hide dropdown content when not open */
+.dropdown:not(.open) .dropdown-content {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+}
+.dropdown.open .dropdown-content {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+.dropdown-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+.dropdown-item {
+  color: #333;
+  padding: 14px 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f5f9;
+  color: #0b6bab;
+}
+
+/* Active item styling */
+.dropdown-item.active {
+  background-color: #e6f7ff;
+  color: #0b6bab;
+  font-weight: 500;
+}
+
+.dropdown-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, #0b6bab, #fb3c00);
+}
+
+/* Total value section */
+.total-value {
+  text-align: right;
+  position: relative;
+  z-index: 2;
+}
+
+.value-label {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.value-amount {
+  font-size: 28px;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Calculator body */
+.calculator-body {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 28px;
+  gap: 32px;
+  background-color: white;
+}
+
+/* Inputs section */
+.inputs-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.input-group {
+  margin-bottom: 28px;
+  transition: all 0.3s;
+  justify-content: space-between;
+  display: block;
+}
+
+.input-group:hover {
+  transform: translateX(2px);
+}
+
+.label-value {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.input-label {
+  font-size: 15px;
+  color: #444;
+  font-weight: 500;
+  position: relative;
+  padding-left: 16px;
+}
+
+.input-label::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0b6bab, #fb3c00);
+}
+
+.value-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.value-input {
+  width: 120px;
+  padding: 10px 26px 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 15px;
+  text-align: right;
+  transition: all 0.3s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.value-input:focus {
+  border-color: #0b6bab;
+  box-shadow: 0 0 0 3px rgba(11, 107, 171, 0.15);
+  outline: none;
+}
+
+.currency-symbol {
+  position: absolute;
+  right: 12px;
+  color: #777;
+}
+
+/* Time period toggle styles */
+.time-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.time-input {
+  width: 80px;
+}
+
+.period-toggle {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.period-btn {
+  background-color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+  min-width: 36px;
+  text-align: center;
+}
+
+.period-btn:not(:last-child) {
+  border-right: 1px solid #ddd;
+}
+
+.period-btn.active {
+  background: linear-gradient(135deg, #0b6bab, #fb3c00);
+  color: white;
+  font-weight: 500;
+}
+
+/* Slider styles */
+.slider-container {
+  width: 100%;
+  padding: 0 8px;
+  margin-top: 6px;
+}
+
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: linear-gradient(to right, #0b6bab, #fb3c00);
+  outline: none;
+  border-radius: 6px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid #0b6bab;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 2px solid #0b6bab;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.slider::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Compounding select styles */
+.compounding-options {
+  width: 100%;
+}
+
+.compounding-select {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #444;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23777' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+}
+
+.compounding-select:focus {
+  border-color: #0b6bab;
+  box-shadow: 0 0 0 3px rgba(11, 107, 171, 0.15);
+  outline: none;
+}
+
+/* Results section */
+.results-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.chart-container {
+  width: 100%;
+  height: 220px;
+  margin-bottom: 28px;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: rgba(247, 249, 251, 0.8);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  justify-items: center;
+}
+
+/* Results breakdown */
+.results-breakdown {
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f0f0f0;
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s;
+  background-color: rgba(247, 249, 251, 0.6);
+}
+
+.breakdown-item:hover {
+  transform: translateX(3px);
+  background-color: rgba(247, 249, 251, 0.9);
+}
+
+.dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 14px;
+}
+
+.returns-dot {
+  background-color: #fb3c00;
+  box-shadow: 0 0 0 2px rgba(251, 60, 0, 0.2);
+}
+
+.investment-dot {
+  background-color: #0b6bab;
+  box-shadow: 0 0 0 2px rgba(11, 107, 171, 0.2);
+}
+
+.breakdown-label {
+  flex: 1;
+  color: #444;
+  font-weight: 500;
+}
+
+.breakdown-value {
+  font-weight: 600;
+  color: #333;
+  font-size: 16px;
+}
+
+.compounding-info {
+  border-top: 1px solid #eee;
+  padding-top: 16px;
+  margin-top: 8px;
+}
+
+.compounding-label {
+  color: #777;
+  font-size: 14px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .calculator-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .total-value {
+    text-align: left;
+    width: 100%;
+  }
+  
+  .calculator-body {
+    flex-direction: column;
+  }
+  
+  .inputs-section,
+  .results-section {
+    width: 100%;
+  }
+  
+  .dropdown-btn {
+    width: 100%;
+  }
+}
+
+/* Animation for dropdown */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Improve dropdown toggle functionality */
+.dropdown-btn:focus + .dropdown-content,
+.dropdown-btn:active + .dropdown-content {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Focus styles for accessibility */
+input:focus, 
+select:focus, 
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(11, 107, 171, 0.2);
+}
+
+/* Add a subtle transition when switching between calculators */
+.inputs-section form {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Animation classes for calculator type switching */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-in {
+  opacity: 1;
+  transition: opacity 0.3s ease-in;
+}
+
+/* Enhanced box effects */
+.fd-calculator-container {
+  position: relative;
+}
+
+.fd-calculator-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right, #0b6bab, #fb3c00);
+  border-radius: 4px 4px 0 0;
+}

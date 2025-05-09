@@ -78,6 +78,11 @@
           >Plans</a>
         </c-nav-item>
         <c-nav-item>
+          <a class="nav-link" [routerLink]="'/fd-calculator'"
+          [ngClass]="{ 'active': currentRoute === '/fd-calculator' }"
+          >Calculator</a>
+        </c-nav-item>
+        <c-nav-item>
           <a class="nav-link"[routerLink]="'/about'"
               [ngClass]="{ 'active': currentRoute === '/about' }"
               >About Us</a>
