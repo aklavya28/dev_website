@@ -1,0 +1,109 @@
+<div class="container">
+    <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search_form">
+        <mat-form-field appearance="outline">
+          <mat-label>Date Range</mat-label>
+          <mat-date-range-input [rangePicker]="picker" formGroupName="dateRange">
+            <input matStartDate formControlName="start" placeholder="Start date">
+            <input matEndDate formControlName="end" placeholder="End date">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+          <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+          <!-- Errors -->
+           @if(searchForm.get('dateRange.start')?.hasError('required')){
+            <mat-error> Start date is required</mat-error>
+           }@else if (searchForm.get('dateRange.end')?.hasError('required')) {
+            <mat-error>End date is required </mat-error>
+           }@else if (searchForm.get('dateRange')?.hasError('dateRangeInvalid')) {
+            <mat-error>Start date cannot be after end date</mat-error>
+           }
+
+        </mat-form-field>
+        <button mat-mini-fab color="primary" type="submit" [disabled]="searchForm.invalid || isLoading">
+            <fa-icon [icon]="camera"></fa-icon>
+        </button>
+      </form>
+</div>
+<div class="container-fluid serach_heading" >
+    <h3>Form Date: <strong>{{f_date | date }}</strong> To <strong>{{l_date | date}}</strong>  </h3>
+</div>
+<div class="container-fluid">
+    <div *ngIf="consolidate" class="consolidate_box">
+        <div>
+            <div><img src="assets/dashboard/member.png" alt=""></div>
+            <div>
+                <h2>New Members</h2>
+                <p>{{consolidate.new_members }}</p>
+            </div>
+
+        </div>
+        <div>
+            <div><img src="assets/dashboard/rd.png" alt=""></div>
+            <div>
+                <h2>RD Business</h2>
+                <p>{{consolidate.rd | currency:"INR"}}</p>
+            </div>
+        </div>
+        <div>
+            <div><img src="assets/dashboard/fd.png" alt=""></div>
+            <div>
+                <h2>FD Business</h2>
+                <p>{{consolidate.fd | currency:"INR"}}</p>
+            </div>
+        </div>
+        <div>
+            <div><img src="assets/dashboard/loan.png" alt=""></div>
+            <div>
+                <h2>Loan Business</h2>
+                <p>{{consolidate.loans | currency:"INR"}}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid" *ngIf="rdData.length">
+    <div class="chart_area">
+        <div>
+            <canvas
+
+            baseChart
+            [data]="MemberChartData"
+            [options]="barChartOptions"
+            [type]="pieChartType">
+          </canvas>
+        </div>
+        <div>
+            <canvas
+            baseChart
+            [data]="RdChartData"
+            [options]="barChartOptions"
+            [type]="barChartType">
+          </canvas>
+        </div>
+
+    </div>
+    <div class="chart_area">
+        <div>
+            <canvas
+            baseChart
+            [data]="FdChartData"
+            [options]="barChartOptions"
+            [type]="barChartType">
+          </canvas>
+        </div>
+        <div>
+            <canvas
+            baseChart
+            [data]="loanChartData"
+            [options]="barChartOptions"
+            [type]="barChartType"
+            [plugins]="[]"
+            >
+          </canvas>
+        </div>
+    </div>
+</div>
+
+<div  >
+
+  </div>

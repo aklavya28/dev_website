@@ -16,7 +16,7 @@ import {
 
 @Component({
   selector: 'app-home',
-  imports: [ThemeDirective,CarouselCaptionComponent, CarouselComponent, CarouselIndicatorsComponent, CarouselInnerComponent, NgFor, CarouselItemComponent, CarouselControlComponent, RouterModule],
+  imports: [ThemeDirective, CarouselComponent, CarouselIndicatorsComponent, CarouselInnerComponent, NgFor, CarouselItemComponent, CarouselControlComponent, RouterModule],
   // standalone:false,
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

@@ -1,0 +1,66 @@
+.consolidate_box {
+    display: flex;
+    background: linear-gradient(45deg, #0b6bab, #fb3c00);
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 7px;
+    gap: 10px;
+}
+
+.consolidate_box>div {
+    flex: 1;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.consolidate_box>div h2 {
+    font-size: 19px;
+    margin: 8px 0 0;
+    font-weight: bold;
+    color: #444;
+}
+
+.consolidate_box>div p {
+    font-weight: bold;
+    font-size: 28px;
+    background: linear-gradient(45deg,#0b6bab, #fb3c00);
+    background-clip: text;
+    color: transparent;
+    margin: 0;
+}
+.chart_area {
+    display: flex;
+    gap: 15px;
+    flex-flow: row wrap;
+    margin-bottom: 15px;
+
+}
+.chart_area > div{
+    padding: 30px;
+
+    max-width: calc(50% - 7px);
+    flex: 1;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 5px;
+}
+.chart_area canvas {
+    height: auto;
+    max-height: 400px;
+}
+.search_form{
+    padding: 30px 0;
+    display: flex;
+    gap: 15px;
+    button{
+        height: 50px;
+        width: 50px;
+    }
+}
+.serach_heading strong{
+    color: teal
+}

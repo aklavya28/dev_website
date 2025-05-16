@@ -1,0 +1,216 @@
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ApiService } from '../../api.service';
+import { Subject, takeUntil } from 'rxjs';
+import { CommonModule, JsonPipe } from '@angular/common';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration, ChartType,Chart } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule, MatIconButton } from '@angular/material/button';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon';
+Chart.register(ChartDataLabels);
+import { faSearch,faEnvelope, faBuilding, faL } from '@fortawesome/free-solid-svg-icons';
+@Component({
+  selector: 'app-web-dashboard',
+  imports: [
+    // JsonPipe,
+    CommonModule,
+    BaseChartDirective,
+    FontAwesomeModule,
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatIconModule
+
+  ],
+  templateUrl: './web-dashboard.component.html',
+  styleUrl: './web-dashboard.component.scss',
+  providers: [provideNativeDateAdapter()],
+  // changeDetection: ChangeDetectionStrategy.OnPush,
+ })
+export class WebDashboardComponent implements OnInit{
+  // form
+    searchForm!: FormGroup;
+  // form
+   camera = faSearch
+  private unsubscribe$ = new Subject<void>();
+  isLoading:boolean = false;
+  breakup:any
+  consolidate:any
+  rdData:any[] = []
+  fdData:any[] = []
+  loanData:any[] = []
+  new_memberData:any[] = []
+  f_date: Date | null = null;
+  l_date: Date | null = null;
+  // charts
+   // Chart type
+   barChartType: ChartType = 'bar';
+   pieChartType: ChartType = 'doughnut';
+
+   // Chart options
+  //  barChartOptions: ChartConfiguration['options'] = {
+  //    responsive: true,
+  //    plugins: {
+  //      legend: {
+  //        display: true
+
+  //      },
+
+  //    },
+  //    scales: {
+  //      x: {
+
+  //      },
+  //      y: {
+  //        beginAtZero: true
+  //      }
+  //    }
+  //  };
+  barChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+        color: '#000',
+        font: {
+          weight: 'bold'
+        },
+        formatter: (value: any) => {
+          return value; // Customize if needed (e.g., `₹${value}`)
+        }
+      }
+    },
+    scales: {
+      x: {},
+      y: {
+        beginAtZero: true
+      }
+    }
+  };
+
+   // Chart data
+   MemberChartData:any
+   RdChartData:any
+   FdChartData:any
+   loanChartData:any
+  // charts
+  constructor(
+    private api: ApiService,
+    private fb: FormBuilder
+  ){}
+  ngOnInit(): void {
+    this.loadData()
+    this.searchForm = this.loadForm()
+  }
+  dateRangeValidator(group: AbstractControl): ValidationErrors | null {
+    const start = group.get('start')?.value;
+    const end = group.get('end')?.value;
+    if (!start || !end) return null;
+    return new Date(start) <= new Date(end) ? null : { dateRangeInvalid: true };
+  }
+
+  loadData(dates?: any) {
+    // Reset state
+    this.consolidate = "";
+    this.breakup = [];
+    this.rdData = [];
+    this.fdData = [];
+    this.new_memberData = [];
+    this.loanData = [];
+
+    // Optional: set loading spinner flag
+    this.isLoading = true;
+
+    this.api.dashboard(dates)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (response) => {
+          const data = response?.body;
+          if (!data) return;
+
+          this.breakup = data.breakup || {};
+          this.consolidate = data.consolidate || '';
+          this.rdData = this.breakup.rd || [];
+          this.fdData = this.breakup.fd || [];
+          this.new_memberData = this.breakup.new_members || [];
+          this.loanData = data.merged_loans || [];
+
+          this.f_date = data.first_date;
+          this.l_date = data.last_date;
+
+          this.MemberChartData = this.buildChartData('New Members', this.new_memberData);
+          this.RdChartData = this.buildChartData('RD Business', this.rdData);
+          this.FdChartData = this.buildChartData('FD Business', this.fdData);
+          this.loanChartData = this.buildChartData('Loan Business', this.loanData);
+        },
+        error: (error) => {
+          console.error('Error loading dashboard:', error);
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      });
+  }
+  buildChartData(label: string, dataArray: any[]) {
+    return {
+      labels: dataArray.map(b => b.branch_code),
+      datasets: [{
+        label,
+        data: dataArray.map(b => parseFloat(b.account)),
+        backgroundColor: [
+          'rgb(188, 16, 137)',
+          'rgb(23, 165, 89)',
+          'rgb(174, 152, 15)',
+          'rgb(120, 20, 145)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 125, 86)'
+        ]
+      }]
+    };
+  }
+
+  loadForm(){
+  return  this.fb.group({
+      dateRange: this.fb.group({
+        start: [null, Validators.required],
+        end: [null, Validators.required],
+      }, { validators: this.dateRangeValidator }),
+      t: this.fb.control(null)
+    },
+
+  );
+  }
+  onSearch(){
+    if (this.searchForm.invalid) {
+      this.searchForm.markAllAsTouched();
+      return;
+    }
+
+    const dateRange = this.searchForm.get('dateRange')?.value;
+    if (!dateRange.start || !dateRange.end) return;
+
+    const payload = {
+      start_date: this.formatDate(dateRange.start),
+      end_date: this.formatDate(dateRange.end)
+    };
+    console.log()
+    this.loadData(JSON.stringify(payload) );
+    this.isLoading = false
+
+  }
+  formatDate(date: Date): string {
+    return date.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+  }
+}

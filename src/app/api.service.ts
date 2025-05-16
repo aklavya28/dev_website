@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 
 export class ApiService {
   url = "https://app.devrising.in/" //save-contact
+  url2 = "http://localhost:3000" //save-contact
   constructor(
     private http: HttpClient
   ) { }
@@ -18,6 +19,14 @@ export class ApiService {
       observe: 'response'
      })
 
+  }
+  dashboard(dates?:any): Observable<any>{
+    return this.http.get<any>(`${this.url2}/api/web-dashboard/?dates=${dates}`, {
+      headers: new HttpHeaders({
+        "Content-Type":"application/json"
+      }),
+      observe: 'response'
+    })
   }
 
 
