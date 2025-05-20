@@ -64,3 +64,24 @@
 .serach_heading strong{
     color: teal
 }
+.chart_area_full {
+  display: flex;
+  gap: 15px; // better than margin-bottom if multiple charts are side-by-side or stacked
+  flex-wrap: wrap;
+  margin-bottom: 15px;
+
+  > div {
+    flex: 1 1 100%;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    padding: 16px;
+    background-color: #fff;
+    min-height: 300px;
+
+    > canvas {
+      width: 100% !important;
+      height: auto !important;
+      display: block;
+    }
+  }
+}

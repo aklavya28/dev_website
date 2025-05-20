@@ -47,6 +47,8 @@ export class WebDashboardComponent implements OnInit{
   rdData:any[] = []
   fdData:any[] = []
   loanData:any[] = []
+  disposit_withdrawlData:any[] = []
+
   new_memberData:any[] = []
   f_date: Date | null = null;
   l_date: Date | null = null;
@@ -105,6 +107,7 @@ export class WebDashboardComponent implements OnInit{
    RdChartData:any
    FdChartData:any
    loanChartData:any
+   disposit_withdrawlChartData:any
   // charts
   constructor(
     private api: ApiService,
@@ -146,6 +149,7 @@ export class WebDashboardComponent implements OnInit{
           this.fdData = this.breakup.fd || [];
           this.new_memberData = this.breakup.new_members || [];
           this.loanData = data.merged_loans || [];
+          this.disposit_withdrawlData = data.incoming_outgoing || [];
 
           this.f_date = data.first_date;
           this.l_date = data.last_date;
@@ -154,6 +158,7 @@ export class WebDashboardComponent implements OnInit{
           this.RdChartData = this.buildChartData('RD Business', this.rdData);
           this.FdChartData = this.buildChartData('FD Business', this.fdData);
           this.loanChartData = this.buildChartData('Loan Business', this.loanData);
+          this.disposit_withdrawlChartData = this.buildMultiLineChartData('Diposite Withdrawal', this.disposit_withdrawlData);
         },
         error: (error) => {
           console.error('Error loading dashboard:', error);
@@ -180,6 +185,42 @@ export class WebDashboardComponent implements OnInit{
       }]
     };
   }
+
+  buildMultiLineChartData(label: string, dataArray: any[]) {
+  const labels = dataArray.map(b => b.branch_code);
+
+  return {
+    labels,
+    datasets: [
+      {
+        label: 'Loan Amount',
+        data: dataArray.map(b => parseFloat(b.loan_amount) || 0),
+        borderColor: 'rgb(255, 99, 132)',
+         backgroundColor: ['rgb(188, 16, 137)'],
+        fill: false,
+        tension: 0.1
+      },
+      {
+        label: 'Deposit Amount',
+        data: dataArray.map(b => parseFloat(b.deposit_account) || 0),
+        borderColor: 'rgb(54, 162, 235)',
+         backgroundColor: ['rgb(23, 165, 89)'],
+        fill: false,
+        tension: 0.1
+      },
+      {
+        label: 'Withdrawal Amount',
+        data: dataArray.map(b => parseFloat(b.withdrawal_amount) || 0),
+        borderColor: 'rgb(255, 206, 86)',
+         backgroundColor: ['rgb(255, 125, 86)'],
+        fill: false,
+        tension: 0.1
+      }
+    ]
+  };
+}
+
+
 
   loadForm(){
   return  this.fb.group({
