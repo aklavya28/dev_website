@@ -13,6 +13,8 @@ import { MatButtonModule, MatIconButton } from '@angular/material/button';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
+import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
+
 Chart.register(ChartDataLabels);
 import { faSearch,faEnvelope, faBuilding, faL } from '@fortawesome/free-solid-svg-icons';
 @Component({
@@ -27,7 +29,8 @@ import { faSearch,faEnvelope, faBuilding, faL } from '@fortawesome/free-solid-sv
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatIconModule
+    MatIconModule,
+    NgxSpinnerModule
 
   ],
   templateUrl: './web-dashboard.component.html',
@@ -48,6 +51,7 @@ export class WebDashboardComponent implements OnInit{
   fdData:any[] = []
   loanData:any[] = []
   disposit_withdrawlData:any[] = []
+  is_spinner: boolean = false
 
   new_memberData:any[] = []
   f_date: Date | null = null;
@@ -111,9 +115,12 @@ export class WebDashboardComponent implements OnInit{
   // charts
   constructor(
     private api: ApiService,
+    private spinner: NgxSpinnerService,
     private fb: FormBuilder
   ){}
   ngOnInit(): void {
+    this.is_spinner = true
+    this.spinner.show()
     this.loadData()
     this.searchForm = this.loadForm()
   }
@@ -135,6 +142,8 @@ export class WebDashboardComponent implements OnInit{
 
     // Optional: set loading spinner flag
     this.isLoading = true;
+    this.is_spinner = true
+    this.spinner.show()
 
     this.api.dashboard(dates)
       .pipe(takeUntil(this.unsubscribe$))
@@ -161,10 +170,14 @@ export class WebDashboardComponent implements OnInit{
           this.disposit_withdrawlChartData = this.buildMultiLineChartData('Diposite Withdrawal', this.disposit_withdrawlData);
         },
         error: (error) => {
+            this.is_spinner = false
+            this.spinner.hide()
           console.error('Error loading dashboard:', error);
         },
         complete: () => {
           this.isLoading = false;
+          this.is_spinner = false
+          this.spinner.hide()
         }
       });
   }

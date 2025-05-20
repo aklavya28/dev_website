@@ -1,3 +1,15 @@
+  <div *ngIf="is_spinner">
+    <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
+    <!-- <div style="position: relative; height: 400px;"> <ngx-spinner bdColor = "rgba(75, 221, 50, 0.8)" color = "#fff" [fullScreen]="false" class="spinner_custom" type="square-jelly-box"></ngx-spinner>
+    </div> -->
+  </div>
 <div class="container">
     <form [formGroup]="searchForm" (ngSubmit)="onSearch()" class="search_form">
         <mat-form-field appearance="outline">
