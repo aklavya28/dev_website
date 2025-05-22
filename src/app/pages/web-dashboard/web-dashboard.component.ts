@@ -51,6 +51,8 @@ export class WebDashboardComponent implements OnInit{
   fdData:any[] = []
   loanData:any[] = []
   disposit_withdrawlData:any[] = []
+  topAssociatsData:any[] = []
+
   is_spinner: boolean = false
 
   new_memberData:any[] = []
@@ -112,6 +114,7 @@ export class WebDashboardComponent implements OnInit{
    FdChartData:any
    loanChartData:any
    disposit_withdrawlChartData:any
+    topAssociatsChartData:any
   // charts
   constructor(
     private api: ApiService,
@@ -159,6 +162,7 @@ export class WebDashboardComponent implements OnInit{
           this.new_memberData = this.breakup.new_members || [];
           this.loanData = data.merged_loans || [];
           this.disposit_withdrawlData = data.incoming_outgoing || [];
+          this.topAssociatsData = data.top_associats || [];
 
           this.f_date = data.first_date;
           this.l_date = data.last_date;
@@ -168,6 +172,7 @@ export class WebDashboardComponent implements OnInit{
           this.FdChartData = this.buildChartData('FD Business', this.fdData);
           this.loanChartData = this.buildChartData('Loan Business', this.loanData);
           this.disposit_withdrawlChartData = this.buildMultiLineChartData('Diposite Withdrawal', this.disposit_withdrawlData);
+          this.topAssociatsChartData = this.AssociatChartData('Top Associates', this.topAssociatsData);
         },
         error: (error) => {
             this.is_spinner = false
@@ -187,6 +192,23 @@ export class WebDashboardComponent implements OnInit{
       datasets: [{
         label,
         data: dataArray.map(b => parseFloat(b.account)),
+        backgroundColor: [
+          'rgb(188, 16, 137)',
+          'rgb(23, 165, 89)',
+          'rgb(174, 152, 15)',
+          'rgb(120, 20, 145)',
+          'rgb(54, 162, 235)',
+          'rgb(255, 125, 86)'
+        ]
+      }]
+    };
+  }
+   AssociatChartData(label: string, dataArray: any[]) {
+    return {
+      labels: dataArray.map(b => b.name),
+      datasets: [{
+        label,
+        data: dataArray.map(b => parseFloat(b.member_count)),
         backgroundColor: [
           'rgb(188, 16, 137)',
           'rgb(23, 165, 89)',
