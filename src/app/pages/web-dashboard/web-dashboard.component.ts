@@ -105,6 +105,34 @@ export class WebDashboardComponent implements OnInit{
       y: {
         beginAtZero: true
       }
+
+    }
+  };
+   barHorizontleChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: true
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+        color: '#000',
+        font: {
+          weight: 'bold'
+        },
+        formatter: (value: any) => {
+          return value; // Customize if needed (e.g., `₹${value}`)
+        }
+      }
+    },
+    indexAxis: 'y',
+    scales: {
+      x: {},
+      y: {
+        beginAtZero: true
+      }
+
     }
   };
 
@@ -222,49 +250,49 @@ export class WebDashboardComponent implements OnInit{
   }
 
   buildMultiLineChartData(label: string, dataArray: any[]) {
-  const labels = dataArray.map(b => b.branch_code);
+    const labels = dataArray.map(b => b.branch_code);
 
-  return {
-    labels,
-    datasets: [
-      {
-        label: 'Loan Amount',
-        data: dataArray.map(b => parseFloat(b.loan_amount) || 0),
-        borderColor: 'rgb(255, 99, 132)',
-         backgroundColor: ['rgb(188, 16, 137)'],
-        fill: false,
-        tension: 0.1
-      },
-      {
-        label: 'Deposit Amount',
-        data: dataArray.map(b => parseFloat(b.deposit_account) || 0),
-        borderColor: 'rgb(54, 162, 235)',
-         backgroundColor: ['rgb(23, 165, 89)'],
-        fill: false,
-        tension: 0.1
-      },
-      {
-        label: 'Withdrawal Amount',
-        data: dataArray.map(b => parseFloat(b.withdrawal_amount) || 0),
-        borderColor: 'rgb(255, 206, 86)',
-         backgroundColor: ['rgb(255, 125, 86)'],
-        fill: false,
-        tension: 0.1
-      }
-    ]
-  };
-}
+    return {
+      labels,
+      datasets: [
+        {
+          label: 'Loan Amount',
+          data: dataArray.map(b => parseFloat(b.loan_amount) || 0),
+          borderColor: 'rgb(255, 99, 132)',
+          backgroundColor: ['rgb(188, 16, 137)'],
+          fill: false,
+          tension: 0.1
+        },
+        {
+          label: 'Deposit Amount',
+          data: dataArray.map(b => parseFloat(b.deposit_account) || 0),
+          borderColor: 'rgb(54, 162, 235)',
+          backgroundColor: ['rgb(23, 165, 89)'],
+          fill: false,
+          tension: 0.1
+        },
+        {
+          label: 'Withdrawal Amount',
+          data: dataArray.map(b => parseFloat(b.withdrawal_amount) || 0),
+          borderColor: 'rgb(255, 206, 86)',
+          backgroundColor: ['rgb(255, 125, 86)'],
+          fill: false,
+          tension: 0.1
+        }
+      ]
+    };
+  }
 
 
 
   loadForm(){
-  return  this.fb.group({
-      dateRange: this.fb.group({
-        start: [null, Validators.required],
-        end: [null, Validators.required],
-      }, { validators: this.dateRangeValidator }),
-      t: this.fb.control(null)
-    },
+    return  this.fb.group({
+        dateRange: this.fb.group({
+          start: [null, Validators.required],
+          end: [null, Validators.required],
+        }, { validators: this.dateRangeValidator }),
+        t: this.fb.control(null)
+      },
 
   );
   }
@@ -281,7 +309,7 @@ export class WebDashboardComponent implements OnInit{
       start_date: this.formatDate(dateRange.start),
       end_date: this.formatDate(dateRange.end)
     };
-    console.log()
+
     this.loadData(JSON.stringify(payload) );
     this.isLoading = false
 
