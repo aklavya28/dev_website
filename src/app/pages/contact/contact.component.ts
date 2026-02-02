@@ -9,7 +9,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ApiService } from '../../api.service';
 import Swal from 'sweetalert2'
-import '@sweetalert2/theme-borderless/borderless.css';
+// import '@sweetalert2/theme-borderless/borderless.css';
 
 
 
@@ -63,6 +63,7 @@ export class ContactComponent implements OnInit {
       this.contactForm.markAsUntouched(); // Remove 'touched' state
 
     }, (err) =>{
+      console.log(err)
       Swal.fire({
         icon: "error",
         text: "Somthing want worng, Data not saved"

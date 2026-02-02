@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 
 export class ApiService {
-  url = "https://app.devrising.in/" //save-contact
+  // url = "https://app.devrising.in/" //save-contact
+  url = "http://localhost:3000/" //save-contact
   url2 = "http://localhost:3000" //save-contact
   constructor(
     private http: HttpClient
